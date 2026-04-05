@@ -465,6 +465,7 @@ header.scrolled { background: rgba(7, 11, 20, 0.97); }
     position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(232,255,87,0.03), transparent);
     opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
 }
 .project-card:hover::after { opacity: 1; }
 .project-card:hover { transform: translateY(-8px); border-color: rgba(232,255,87,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
@@ -505,7 +506,7 @@ header.scrolled { background: rgba(7, 11, 20, 0.97); }
     border: 1px solid var(--border);
 }
 
-.project-links { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.5rem; }
+.project-links { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.5rem; position: relative; z-index: 2; }
 .project-link-btn {
     display: inline-flex; align-items: center; gap: 0.4rem;
     font-size: 0.82rem; font-weight: 600; font-family: var(--font-body);
