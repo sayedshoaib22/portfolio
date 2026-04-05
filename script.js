@@ -71,3 +71,18 @@ document.querySelectorAll(
 document.querySelectorAll('.skill-item, .project-card, .contact-card').forEach((el, i) => {
     el.style.transitionDelay = `${i * 0.08}s`;
 });
+
+// ==============================
+// MAKE PROJECT CARDS CLICKABLE
+// ==============================
+document.querySelectorAll('.project-card').forEach(card => {
+    const primaryLink = card.querySelector('.project-link-btn.primary');
+    if (primaryLink) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function(e) {
+            if (!e.target.closest('a')) {
+                window.open(primaryLink.href, '_blank', 'noopener,noreferrer');
+            }
+        });
+    }
+});
