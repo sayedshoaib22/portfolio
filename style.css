@@ -401,6 +401,37 @@ header.scrolled { background: rgba(7, 11, 20, 0.97); }
 @keyframes fillBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* ==============================
+   SKILL CATEGORIES
+============================== */
+.skill-category { margin-bottom: 3rem; }
+.skill-category:last-child { margin-bottom: 0; }
+
+.skill-category-header {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.skill-cat-line { flex: 1; height: 1px; background: var(--border); }
+
+.skill-cat-tag {
+    font-family: var(--font-mono); font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; white-space: nowrap;
+    padding: 0.35rem 1rem; border-radius: 100px;
+}
+.skill-cat-tag.frontend {
+    background: rgba(232,255,87,0.1); color: var(--accent);
+    border: 1px solid rgba(232,255,87,0.25);
+}
+.skill-cat-tag.backend {
+    background: rgba(87,255,204,0.1); color: var(--accent2);
+    border: 1px solid rgba(87,255,204,0.25);
+}
+.skill-cat-tag.database {
+    background: rgba(147,112,255,0.1); color: #b79fff;
+    border: 1px solid rgba(147,112,255,0.25);
+}
+
+/* ==============================
    PROJECTS
 ============================== */
 .projects-section { background: var(--bg); }
