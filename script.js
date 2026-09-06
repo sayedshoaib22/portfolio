@@ -4,7 +4,7 @@
 const dot = document.querySelector('.cursor-dot');
 const ring = document.querySelector('.cursor-ring');
 
-if (window.matchMedia('(pointer: fine)').matches) {
+if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
     document.addEventListener('mousemove', (e) => {
         dot.style.left = e.clientX + 'px';
         dot.style.top = e.clientY + 'px';
@@ -32,9 +32,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // HEADER SCROLL
 // ==============================
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-});
+const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 60);
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 // ==============================
 // HAMBURGER MENU
@@ -43,12 +43,23 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
 hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+});
+
+document.querySelectorAll('.m-link').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open navigation menu');
+    });
 });
 
 // ==============================
 // SCROLL REVEAL
 // ==============================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -61,10 +72,12 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll(
     '.skill-item, .project-card, .contact-card, .about-grid, .agency-inner'
 ).forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    revealObserver.observe(el);
+    if (!prefersReducedMotion) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        revealObserver.observe(el);
+    }
 });
 
 // Stagger cards

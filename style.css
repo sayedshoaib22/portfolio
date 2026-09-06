@@ -69,7 +69,10 @@ header {
     border-bottom: 1px solid var(--border);
     transition: background 0.3s;
 }
-header.scrolled { background: rgba(7, 11, 20, 0.97); }
+header.scrolled {
+    background: rgba(7, 11, 20, 0.78);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.24);
+}
 
 .nav {
     display: flex; align-items: center;
@@ -418,7 +421,7 @@ header.scrolled { background: rgba(7, 11, 20, 0.97); }
     text-transform: uppercase; white-space: nowrap;
     padding: 0.35rem 1rem; border-radius: 100px;
 }
-.skill-cat-tag.frontend {
+.skill-cat-tag.full-stack {
     background: rgba(232,255,87,0.1); color: var(--accent);
     border: 1px solid rgba(232,255,87,0.25);
 }
@@ -429,6 +432,81 @@ header.scrolled { background: rgba(7, 11, 20, 0.97); }
 .skill-cat-tag.database {
     background: rgba(147,112,255,0.1); color: #b79fff;
     border: 1px solid rgba(147,112,255,0.25);
+}
+
+/* ==============================
+   EXPERIENCE
+============================== */
+.experience-section { background: var(--bg); }
+.experience-list {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    max-width: 920px;
+}
+.experience-list::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 2rem;
+    bottom: 2rem;
+    width: 1px;
+    background: linear-gradient(var(--accent), var(--accent2), transparent);
+}
+.experience-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    position: relative;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+}
+.experience-item:hover {
+    transform: translateX(6px);
+    border-color: rgba(87,255,204,0.3);
+    background: var(--surface2);
+}
+.experience-marker {
+    position: relative;
+    z-index: 1;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(232,255,87,0.3);
+    border-radius: 50%;
+    background: var(--bg2);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+}
+.experience-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.65rem;
+}
+.experience-heading h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.4px;
+}
+.experience-heading span {
+    color: var(--accent2);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+}
+.experience-content p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin-bottom: 1rem;
 }
 
 /* ==============================
@@ -712,6 +790,9 @@ footer {
 .footer-brand { display: flex; flex-direction: column; gap: 0.3rem; }
 .footer-brand p { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); }
 .footer-copy { font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); }
+.footer-nav { display: flex; gap: 1.2rem; }
+.footer-nav a { color: var(--text-muted); font-size: 0.8rem; text-decoration: none; }
+.footer-nav a:hover { color: var(--accent); }
 
 /* ==============================
    ANIMATIONS
@@ -753,6 +834,20 @@ footer {
     .hero-title { font-size: clamp(52px, 14vw, 80px); }
     .section-title { font-size: clamp(36px, 10vw, 52px); }
     .footer-inner { flex-direction: column; text-align: center; }
+    .footer-nav { justify-content: center; flex-wrap: wrap; }
     .scroll-indicator { display: none; }
     .cursor-dot, .cursor-ring { display: none; }
+    .experience-list::before { left: 1rem; }
+    .experience-item { grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1.2rem; }
+    .experience-marker { width: 2rem; height: 2rem; font-size: 0.65rem; }
+    .stat-num { font-size: 1.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
